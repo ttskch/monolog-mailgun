@@ -1,5 +1,8 @@
 # monolog-mailgun
 
+[![Latest Stable Version](https://poser.pugx.org/ttskch/monolog-mailgun/version)](https://packagist.org/packages/ttskch/monolog-mailgun)
+[![Total Downloads](https://poser.pugx.org/ttskch/monolog-mailgun/downloads)](https://packagist.org/packages/ttskch/monolog-mailgun)
+
 Monolog handler for [Mailgun](https://www.mailgun.com/)
 
 ## Installation
