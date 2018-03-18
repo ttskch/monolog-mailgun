@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/ttskch/monolog-mailgun/version)](https://packagist.org/packages/ttskch/monolog-mailgun)
 [![Total Downloads](https://poser.pugx.org/ttskch/monolog-mailgun/downloads)](https://packagist.org/packages/ttskch/monolog-mailgun)
 
-Monolog handler for [Mailgun](https://www.mailgun.com/)
+Monolog handler for [Mailgun](https://www.mailgun.com/) using [mailgun/mailgun-php](https://github.com/mailgun/mailgun-php).
 
 ## Installation
 
@@ -26,7 +26,7 @@ $logger->pushHandler($handler);
 $logger->addCritical('Critical Error!');
 ```
 
-## Examples of integration with frameworks
+## Examples of framework integrations
 
 ### Symfony4
 
