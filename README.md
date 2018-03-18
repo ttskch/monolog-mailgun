@@ -67,4 +67,4 @@ MAILGUN_API_KEY=api_key
 
 ### Other
 
-Feel free to send me a PR.
+Feel free to send me a PR🙏
