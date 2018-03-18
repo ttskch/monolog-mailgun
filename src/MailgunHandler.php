@@ -40,7 +40,7 @@ class MailgunHandler extends MailHandler
         $this->mg = $mg;
         $this->domain = $domain;
         $this->from = $from;
-        $this->to = is_array($to) ? $to : [$to];
+        $this->to = (array)$to;
         $this->subject = $subject;
     }
 
@@ -49,12 +49,14 @@ class MailgunHandler extends MailHandler
      */
     protected function send($content, array $records)
     {
+        $contentType = substr($content, 0, 1) === '<' ? 'html' : 'text';
+
         foreach ($this->to as $to) {
             $params = [
                 'from' => $this->from,
                 'to' => $to,
                 'subject' => $this->subject,
-                'text' => $content,
+                $contentType => $content,
             ];
 
             $this->mg->messages()->send($this->domain, $params);
