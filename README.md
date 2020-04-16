@@ -1,14 +1,20 @@
 # monolog-mailgun
 
+[![Build Status](https://travis-ci.org/ttskch/monolog-mailgun.svg?branch=master)](https://travis-ci.org/ttskch/monolog-mailgun)
 [![Latest Stable Version](https://poser.pugx.org/ttskch/monolog-mailgun/version)](https://packagist.org/packages/ttskch/monolog-mailgun)
 [![Total Downloads](https://poser.pugx.org/ttskch/monolog-mailgun/downloads)](https://packagist.org/packages/ttskch/monolog-mailgun)
 
 Monolog handler for [Mailgun](https://www.mailgun.com/) using [mailgun/mailgun-php](https://github.com/mailgun/mailgun-php).
 
+## Requirements
+
+* php:^7.2
+* monolog/monolog:^2.0
+
 ## Installation
 
 ```bash
-$ composer require ttskch/monolog-mailgun:@dev
+$ composer require ttskch/monolog-mailgun
 ```
 
 ## Usage
@@ -28,35 +34,39 @@ $logger->addCritical('Critical Error!');
 
 ## Examples of framework integrations
 
-### Symfony4
+### Symfony4/5
+
+```yaml
+# config/packages/mailgun.yaml
+services:
+    Mailgun\Mailgun:
+        class: Mailgun\Mailgun
+        factory: ['Mailgun\Mailgun', create]
+        arguments: ['%env(MAILGUN_API_KEY)%']
+```
 
 ```yaml
 # config/packages/prod/monolog.yaml
 monolog:
     handlers:
+
+        # ...
+
         email:
             type: fingers_crossed
             action_level: critical
-            handler: deduplicated
-        deduplicated:
-            type: deduplication
             handler: mailgun
         mailgun:
             type: service
-            id: mailgun_handler
+            id: Ttskch\Monolog\Handler\MailgunHandler
 
 services:
-    mailgun:
-        class: Mailgun\Mailgun
-        factory: [Mailgun\Mailgun, create]
-        arguments: ['%env(MAILGUN_API_KEY)%']
-    mailgun_handler:
-        class: Ttskch\Monolog\Handler\MailgunHandler
+    Ttskch\Monolog\Handler\MailgunHandler:
         arguments:
-            - mailgun
+            - '@Mailgun\Mailgun'
             - mg.example.com
             - Alice <alice@example.com>
-            - bob@foo.bar.com
+            - [bob@foo.bar.com]
             - '[Monolog] Error Report'
 ```
 

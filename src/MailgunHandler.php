@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Ttskch\Monolog\Handler;
 
 use Mailgun\Mailgun;
@@ -32,31 +34,28 @@ class MailgunHandler extends MailHandler
      */
     private $subject;
 
-
-    public function __construct(Mailgun $mg, $domain, $from, $to, $subject, $level = Logger::DEBUG, $bubble = true)
+    public function __construct(Mailgun $mg, string $domain, string $from, array $to, string $subject, int $level = Logger::DEBUG, bool $bubble = true)
     {
         parent::__construct($level, $bubble);
 
         $this->mg = $mg;
         $this->domain = $domain;
         $this->from = $from;
-        $this->to = (array)$to;
+        $this->to = $to;
         $this->subject = $subject;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function send($content, array $records)
+    protected function send(string $content, array $records): void
     {
-        $contentType = substr($content, 0, 1) === '<' ? 'html' : 'text';
-
         foreach ($this->to as $to) {
             $params = [
                 'from' => $this->from,
                 'to' => $to,
                 'subject' => $this->subject,
-                $contentType => $content,
+                $this->isHtmlBody($content) ? 'html' : 'text' => $content,
             ];
 
             $this->mg->messages()->send($this->domain, $params);
