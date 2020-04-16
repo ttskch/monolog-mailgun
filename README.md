@@ -55,9 +55,11 @@ monolog:
         email:
             type: fingers_crossed
             action_level: critical
+            level: debug
+            channels: ["!event"]
             handler: deduplicated
         deduplicated:
-            type:    deduplication # prevent to send twice
+            type: deduplication # prevent multiply sending
             handler: mailgun
         mailgun:
             type: service
