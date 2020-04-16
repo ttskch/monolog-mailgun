@@ -26,7 +26,7 @@ $from = 'Alice <alice@example.com>';
 $to = ['bob@foo.bar.com'];
 $subject = '[Monolog] Error Report';
 
-$handler = new \Ttskch\Monolog\Handler\MailgunHandler($mg, $domain, $from, $to, $subject, \Monolog\Logger::CRITICAL);
+$handler = new \Ttskch\Monolog\Handler\MailgunHandler($mg, $domain, $from, $to, $subject);
 $logger = new \Monolog\Logger('mailgun');
 $logger->pushHandler($handler);
 $logger->critical('Critical Error!');
