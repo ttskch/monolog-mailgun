@@ -23,7 +23,7 @@ $ composer require ttskch/monolog-mailgun
 $mg = \Mailgun\Mailgun::create('api_key');
 $domain = 'mg.example.com';
 $from = 'Alice <alice@example.com>';
-$to = 'bob@foo.bar.com';
+$to = ['bob@foo.bar.com'];
 $subject = '[Monolog] Error Report';
 
 $handler = new \Ttskch\Monolog\Handler\MailgunHandler($mg, $domain, $from, $to, $subject);
@@ -55,6 +55,9 @@ monolog:
         email:
             type: fingers_crossed
             action_level: critical
+            handler: deduplicated
+        deduplicated:
+            type:    deduplication # prevent to send twice
             handler: mailgun
         mailgun:
             type: service
