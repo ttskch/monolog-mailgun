@@ -1,1 +1,0 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":186:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:2:{s:55:"Ttskch\Monolog\Handler\MailgunHandlerTest::testSendText";d:0.035;s:55:"Ttskch\Monolog\Handler\MailgunHandlerTest::testSendHtml";d:0.002;}}}

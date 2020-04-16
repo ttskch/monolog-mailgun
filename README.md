@@ -26,10 +26,10 @@ $from = 'Alice <alice@example.com>';
 $to = ['bob@foo.bar.com'];
 $subject = '[Monolog] Error Report';
 
-$handler = new \Ttskch\Monolog\Handler\MailgunHandler($mg, $domain, $from, $to, $subject);
+$handler = new \Ttskch\Monolog\Handler\MailgunHandler($mg, $domain, $from, $to, $subject, \Monolog\Logger::CRITICAL);
 $logger = new \Monolog\Logger('mailgun');
 $logger->pushHandler($handler);
-$logger->addCritical('Critical Error!');
+$logger->critical('Critical Error!');
 ```
 
 ## Examples of framework integrations
