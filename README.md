@@ -67,10 +67,10 @@ services:
     Ttskch\Monolog\Handler\MailgunHandler:
         arguments:
             - '@Mailgun\Mailgun'
-            - mg.example.com
-            - Alice <alice@example.com>
-            - [bob@foo.bar.com]
-            - '[Monolog] Error Report'
+            - mg.example.com # mailgun domain
+            - Alice <alice@example.com> # from
+            - [bob@foo.bar.com] # to
+            - '[Monolog] Error Report' # subject
 ```
 
 ```
